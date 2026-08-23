@@ -76,19 +76,28 @@ export const diagnosisTypes: Record<Axis, DiagnosisType> = {
   D: { axis: 'D', name: '改善不足型', heading: '受講結果を教育改善へ戻す仕組みが、現在のボトルネックです。', description: '「受講した」で終わらず、理解できたか、どこでつまずいたかを把握することで、教育資産は継続的に価値を高められます。', actions: ['受講状況を把握する', '理解度を確認する', '結果を教材・教育方法の改善へ戻す'] },
 }
 
-export const recommendations: Partial<Record<Axis, { title: string; reason: string; url: string; status: 'candidate' }[]>> = {
-  A: [{ title: '教材化は学習目標から始まる', reason: '教える内容を整理する起点として、学習目標の考え方を確認します。', url: '', status: 'candidate' }],
-  B: [
-    { title: '社内資料は、なぜそのままでは教材にならないのか', reason: '資料と教材の違いを、教育設計の観点から整理します。', url: '', status: 'candidate' },
-    { title: 'PowerPoint研修を教育資産に変える条件', reason: '既存の研修資料を継続活用できる形へ変える条件を確認します。', url: '', status: 'candidate' },
+export const recommendations: Partial<Record<Axis, { title: string; reason: string; url: string; status: 'published' }[]>> = {
+  A: [
+    { title: '教材設計は「何を教えるか」から考えてはいけない', reason: '教える内容を整理する起点として、学習後の状態を定める考え方を確認します。', url: 'https://www.adop-context.jp/post/why-not-start-training-design-with-content', status: 'published' },
+    { title: 'コンテキストAIができるまで② 学習目標設計編', reason: '知識を対象者と到達点に結びつける、学習目標設計の具体的な流れを確認します。', url: 'https://www.adop-context.jp/post/how-context-ai-works-2-learning-objectives', status: 'published' },
   ],
-  C: [],
-  D: [{ title: '教育効果を「受講した」で終わらせない', reason: '受講結果を教育改善へ戻す考え方を確認します。', url: '', status: 'candidate' }],
+  B: [
+    { title: '社内資料はなぜ教材にならないのか', reason: '資料と教材の違いを、教育設計の観点から整理します。', url: 'https://www.adop-context.jp/post/why-internal-documents-arent-training-materials', status: 'published' },
+    { title: '生成AIは教材制作をどこまで変えるのか', reason: '既存資料から教材を作る工程と、人が判断すべきポイントを確認します。', url: 'https://www.adop-context.jp/post/how-far-can-generative-ai-change-training-material-creation', status: 'published' },
+  ],
+  C: [
+    { title: '教材制作は誰が担うのか', reason: '教材制作・確認・更新を特定の担当者だけに依存させない役割分担を整理します。', url: 'https://www.adop-context.jp/post/who-should-create-training-materials-role-division', status: 'published' },
+    { title: '大量のマニュアル・規程・営業資料が「使われない資産」になっている会社へ', reason: '資料を継続的に教材化し、組織の運用へ定着させる進め方を確認します。', url: 'https://www.adop-context.jp/post/unused-document-assets-training-content', status: 'published' },
+  ],
+  D: [
+    { title: '従業員教育は教材を作るだけでは改善しない', reason: '受講確認に留まらず、行動や業務成果まで教育効果を捉える視点を確認します。', url: 'https://www.adop-context.jp/post/employee-training-survey-2026-why-training-materials-alone-arent-enough', status: 'published' },
+    { title: '学習効果の高い教材をAIは作れるのか', reason: '学習効果を高める条件と、教材品質を確認・改善する観点を整理します。', url: 'https://www.adop-context.jp/post/can-ai-create-effective-learning-content-7-conditions', status: 'published' },
+  ],
 }
 
 export const links = {
   primaryCta: '',
-  secondaryCta: '',
+  secondaryCta: 'https://www.adop-context.jp/post/what-is-educational-asset-transformation',
 }
 
 export const appVersion = '0.1.0'

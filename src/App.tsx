@@ -244,10 +244,10 @@ function ResultScreen({ result, onRestart }: { result: DiagnosisResult; onRestar
           <div className="article-grid">
             {articles.map((article) => (
               <article className="article-card" key={article.title}>
-                <p className="candidate-label">記事候補</p>
+                <p className="candidate-label">おすすめ記事</p>
                 <h3>{article.title}</h3>
                 <p>{article.reason}</p>
-                <button disabled={!article.url} onClick={() => track('diagnosis_recommendation_click', { diagnosis_type: result.primaryType.name, article_url: article.url })}>記事を読む →</button>
+                <a href={article.url} target="_blank" rel="noreferrer" onClick={() => track('diagnosis_recommendation_click', { diagnosis_type: result.primaryType.name, article_url: article.url })}>記事を読む →</a>
               </article>
             ))}
           </div>
@@ -264,7 +264,7 @@ function ResultScreen({ result, onRestart }: { result: DiagnosisResult; onRestar
 
       <section className="secondary-action">
         <p>教育資産化そのものをもう少し知りたい方へ</p>
-        <button disabled={!links.secondaryCta} onClick={() => track('diagnosis_secondary_cta_click')}>教育資産化について詳しく読む →</button>
+        <a href={links.secondaryCta} target="_blank" rel="noreferrer" onClick={() => track('diagnosis_secondary_cta_click')}>教育資産化について詳しく読む →</a>
       </section>
     </main>
   )

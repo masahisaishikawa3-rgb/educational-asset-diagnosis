@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { questions } from '../config/diagnosis'
+import { links, questions, recommendations } from '../config/diagnosis'
 import type { Answers } from '../types'
 import { calculateDiagnosis } from './diagnosis'
 
@@ -55,5 +55,18 @@ describe('calculateDiagnosis', () => {
 
   it('未回答がある場合は結果を生成しない', () => {
     expect(() => calculateDiagnosis({})).toThrow('12問すべてに回答してください。')
+  })
+})
+
+describe('result links', () => {
+  it('各Typeに2本の公開記事が設定されている', () => {
+    for (const axis of ['A', 'B', 'C', 'D'] as const) {
+      expect(recommendations[axis]).toHaveLength(2)
+      expect(recommendations[axis]?.every((article) => article.status === 'published' && article.url.startsWith('https://'))).toBe(true)
+    }
+  })
+
+  it('教育資産化の解説ページが設定されている', () => {
+    expect(links.secondaryCta).toBe('https://www.adop-context.jp/post/what-is-educational-asset-transformation')
   })
 })

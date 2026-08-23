@@ -117,8 +117,8 @@ button:disabled { cursor: not-allowed; }
 .candidate-label { color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: .15em; }
 .article-card h3 { font-family: inherit; font-size: 20px; font-weight: 700; line-height: 1.7; }
 .article-card > p:not(.candidate-label) { color: var(--muted); font-size: 13px; line-height: 1.8; }
-.article-card button, .secondary-action button { border: 0; background: none; color: var(--green); padding: 12px 0 0; font-weight: 600; }
-.article-card button:disabled, .secondary-action button:disabled { color: #919a97; }
+.article-card a, .secondary-action a { display: inline-block; color: var(--green); padding: 12px 0 0; font-weight: 600; text-decoration: none; }
+.article-card a:hover, .secondary-action a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .pending-card span { color: var(--muted); font-size: 13px; }
 .next-action-section { background: var(--green-dark); color: white; text-align: center; padding: 90px 32px; }
 .section-kicker.light { color: #a9ccc4; }
