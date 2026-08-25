@@ -124,8 +124,8 @@ button:disabled { cursor: not-allowed; }
 .section-kicker.light { color: #a9ccc4; }
 .next-action-section h2 { margin: 24px 0; font-family: inherit; font-size: clamp(28px, 5vw, 42px); font-weight: 700; line-height: 1.55; }
 .next-action-section > p:not(.section-kicker) { max-width: 590px; margin: 0 auto 34px; color: #d3e0dd; line-height: 2; }
-.light-button { min-width: 330px; min-height: 58px; border: 0; background: white; color: var(--green-dark); font-weight: 700; }
-.light-button:disabled { opacity: .55; }
+.light-button { display: inline-flex; align-items: center; justify-content: center; min-width: 330px; min-height: 58px; border: 0; background: white; color: var(--green-dark); font-weight: 700; text-decoration: none; }
+.light-button:hover { background: #edf5f1; }
 .light-button span { margin-left: 20px; }
 .next-action-section small { display: block; margin-top: 13px; color: #abc3bd; }
 .secondary-action { text-align: center; padding: 55px 24px 70px; }

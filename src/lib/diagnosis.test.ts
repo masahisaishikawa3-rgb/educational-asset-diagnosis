@@ -59,6 +59,10 @@ describe('calculateDiagnosis', () => {
 })
 
 describe('result links', () => {
+  it('1資料デモへのPrimary CTAが設定されている', () => {
+    expect(links.primaryCta).toBe('https://www.adop-context.jp/context-ai#1demo')
+  })
+
   it('各Typeに2本の公開記事が設定されている', () => {
     for (const axis of ['A', 'B', 'C', 'D'] as const) {
       expect(recommendations[axis]).toHaveLength(2)

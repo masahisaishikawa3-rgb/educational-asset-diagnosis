@@ -47,6 +47,8 @@ describe('診断フロー', () => {
     expect(screen.getByText('まず取り組む3つ')).toBeTruthy()
     expect(screen.getByText('今の御社におすすめの記事')).toBeTruthy()
     expect(screen.getByText(/次は、実際の社内資料で/)).toBeTruthy()
+    expect(screen.getByRole('link', { name: /自社資料で教育資産化を試す/ }).getAttribute('href'))
+      .toBe('https://www.adop-context.jp/context-ai#1demo')
 
     const content = document.body.textContent ?? ''
     expect(content.indexOf('教育資産化の4つの状態')).toBeLessThan(content.indexOf('まず取り組む3つ'))

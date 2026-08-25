@@ -257,8 +257,7 @@ function ResultScreen({ result, onRestart }: { result: DiagnosisResult; onRestar
         <p className="section-kicker light">NEXT ACTION</p>
         <h2>次は、実際の社内資料で<br />確認してみる</h2>
         <p>御社で使っているPDF・Word・PowerPointを使い、「読む資料」がどのように「学べる教育資産」へ変わるか確認できます。</p>
-        <button className="light-button" disabled={!links.primaryCta} onClick={() => track('diagnosis_primary_cta_click', { level: result.level.level, diagnosis_type: result.primaryType.name })}>自社資料で教育資産化を試す <span>→</span></button>
-        {!links.primaryCta && <small>正式な体験導線は現在準備中です</small>}
+        <a className="light-button" href={links.primaryCta} onClick={() => track('diagnosis_primary_cta_click', { level: result.level.level, diagnosis_type: result.primaryType.name })}>自社資料で教育資産化を試す <span>→</span></a>
       </section>
 
       <section className="secondary-action">

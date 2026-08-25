@@ -96,7 +96,7 @@ export const recommendations: Partial<Record<Axis, { title: string; reason: stri
 }
 
 export const links = {
-  primaryCta: '',
+  primaryCta: 'https://www.adop-context.jp/context-ai#1demo',
   secondaryCta: 'https://www.adop-context.jp/post/what-is-educational-asset-transformation',
 }
 
