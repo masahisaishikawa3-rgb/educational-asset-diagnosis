@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://diagnosis.adop-context.co.jp/sitemap.xml
