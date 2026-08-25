@@ -90,9 +90,9 @@ function App() {
 
 function Brand() {
   return (
-    <div className="brand" aria-label="教育資産化ラボ">
-      <span className="brand-mark" aria-hidden="true">A</span>
-      <span><strong>ADOP CONTEXT</strong><small>教育資産化ラボ</small></span>
+    <div className="brand" aria-label="adop Context 教育資産化診断">
+      <img src="/assets/adop-context-logo.png" alt="adop Context" />
+      <span className="brand-service">教育資産化診断</span>
     </div>
   )
 }
@@ -102,7 +102,6 @@ function Landing({ onStart }: { onStart: () => void }) {
     <main className="landing-shell">
       <header className="site-header"><Brand /><span className="header-note">現在地を知る、最初の3分</span></header>
       <section className="hero">
-        <div className="eyebrow"><span /> 教育資産化診断</div>
         <h1>御社の社内知識は、<br /><em>「教育資産」</em>として<br className="mobile-only" />活用できていますか？</h1>
         <p className="hero-lead">12問・約3分で、社内知識の現在地を整理します。</p>
 
