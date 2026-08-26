@@ -50,9 +50,8 @@ function App() {
       setScreen('result')
       setError('')
       track('diagnosis_complete', {
-        level: nextResult.level.level,
-        diagnosis_type: nextResult.primaryType.name,
-        total_score: nextResult.totalScore,
+        score_band: `${nextResult.level.min}-${nextResult.level.max}`,
+        result_type: nextResult.primaryType.name,
       })
       window.scrollTo({ top: 0, behavior: 'instant' })
     } catch (cause) {

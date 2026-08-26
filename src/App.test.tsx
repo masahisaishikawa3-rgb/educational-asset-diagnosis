@@ -5,8 +5,12 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
+const gtag = vi.fn()
+
 beforeEach(() => {
   sessionStorage.clear()
+  gtag.mockClear()
+  vi.stubGlobal('gtag', gtag)
   vi.stubGlobal('scrollTo', vi.fn())
 })
 
@@ -34,6 +38,7 @@ describe('診断フロー', () => {
     const user = userEvent.setup()
     render(<App />)
     await user.click(screen.getByRole('button', { name: /診断を始める/ }))
+    expect(gtag).toHaveBeenCalledWith('event', 'diagnosis_start', {})
 
     for (let index = 0; index < 12; index += 1) {
       const choices = screen.getAllByRole('radio')
@@ -49,6 +54,10 @@ describe('診断フロー', () => {
     expect(screen.getByText(/次は、実際の社内資料で/)).toBeTruthy()
     expect(screen.getByRole('link', { name: /自社資料で教育資産化を試す/ }).getAttribute('href'))
       .toBe('https://www.adop-context.jp/context-ai#1demo')
+    expect(gtag).toHaveBeenCalledWith('event', 'diagnosis_complete', {
+      score_band: '12-19',
+      result_type: '体系化不足型',
+    })
 
     const content = document.body.textContent ?? ''
     expect(content.indexOf('教育資産化の4つの状態')).toBeLessThan(content.indexOf('まず取り組む3つ'))

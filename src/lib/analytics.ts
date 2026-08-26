@@ -3,6 +3,7 @@ export type AnalyticsEvent =
   | 'diagnosis_start'
   | 'diagnosis_answer'
   | 'diagnosis_complete'
+  | 'generate_lead'
   | 'diagnosis_recommendation_click'
   | 'diagnosis_primary_cta_click'
   | 'diagnosis_secondary_cta_click'
@@ -14,4 +15,8 @@ export function track(event: AnalyticsEvent, parameters: Record<string, string |
   } catch {
     // Analytics must never block the diagnosis experience.
   }
+}
+
+export function trackDiagnosisReportLead() {
+  track('generate_lead', { form_type: 'diagnosis_report' })
 }
