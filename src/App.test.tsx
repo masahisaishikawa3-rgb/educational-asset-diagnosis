@@ -17,6 +17,14 @@ beforeEach(() => {
 afterEach(() => cleanup())
 
 describe('診断フロー', () => {
+  it('ロゴから公式サイトへ移動でき、著作権表記を表示する', () => {
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: 'adop Context 公式サイトへ' }).getAttribute('href'))
+      .toBe('https://www.adop-context.jp/')
+    expect(screen.getByText('© 2026 Adop-Context Co., Ltd.')).toBeTruthy()
+  })
+
   it('未回答では進めず、戻ったときに回答が復元される', async () => {
     const user = userEvent.setup()
     render(<App />)

@@ -89,11 +89,15 @@ function App() {
 
 function Brand() {
   return (
-    <div className="brand" aria-label="adop Context 教育資産化診断">
+    <a className="brand" href="https://www.adop-context.jp/" aria-label="adop Context 公式サイトへ">
       <img src="/assets/adop-context-logo.png" alt="adop Context" />
       <span className="brand-service">教育資産化診断</span>
-    </div>
+    </a>
   )
+}
+
+function SiteFooter() {
+  return <footer className="site-footer">© 2026 Adop-Context Co., Ltd.</footer>
 }
 
 function Landing({ onStart }: { onStart: () => void }) {
@@ -121,6 +125,7 @@ function Landing({ onStart }: { onStart: () => void }) {
           <p>社内資料やノウハウを、社員が理解し、判断や行動に生かせる形に整え、継続的に活用できる状態にすることです。</p>
         </div>
       </section>
+      <SiteFooter />
     </main>
   )
 }
@@ -176,6 +181,7 @@ function QuestionScreen({ index, answers, error, onAnswer, onBack, onNext }: {
           {index === questions.length - 1 ? '診断結果を見る' : '次へ'} <span>→</span>
         </button>
       </footer>
+      <SiteFooter />
     </main>
   )
 }
@@ -263,12 +269,13 @@ function ResultScreen({ result, onRestart }: { result: DiagnosisResult; onRestar
         <p>教育資産化そのものをもう少し知りたい方へ</p>
         <a href={links.secondaryCta} target="_blank" rel="noreferrer" onClick={() => track('diagnosis_secondary_cta_click')}>教育資産化について詳しく読む →</a>
       </section>
+      <SiteFooter />
     </main>
   )
 }
 
 function Recovery({ onRestart }: { onRestart: () => void }) {
-  return <main className="recovery"><Brand /><h1>診断結果を表示できませんでした</h1><p>回答が揃っていない可能性があります。最初からもう一度お試しください。</p><button className="primary-button" onClick={onRestart}>最初からやり直す</button></main>
+  return <main className="recovery"><Brand /><h1>診断結果を表示できませんでした</h1><p>回答が揃っていない可能性があります。最初からもう一度お試しください。</p><button className="primary-button" onClick={onRestart}>最初からやり直す</button><SiteFooter /></main>
 }
 
 export default App
