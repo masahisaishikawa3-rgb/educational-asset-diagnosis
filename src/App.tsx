@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { axisLabels, links, questions, recommendations } from './config/diagnosis'
+import { appVersion, axisLabels, links, questions, recommendations } from './config/diagnosis'
 import { track } from './lib/analytics'
 import { calculateDiagnosis } from './lib/diagnosis'
+import { saveAnonymousDiagnosis } from './lib/storage'
 import { clearAnswers, loadAnswers, saveAnswers } from './lib/session'
 import type { Answers, Axis, DiagnosisResult } from './types'
 
@@ -53,6 +54,7 @@ function App() {
         score_band: `${nextResult.level.min}-${nextResult.level.max}`,
         result_type: nextResult.primaryType.name,
       })
+      void saveAnonymousDiagnosis({ answers, result: nextResult, appVersion })
       window.scrollTo({ top: 0, behavior: 'instant' })
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : '診断結果を計算できませんでした。')
