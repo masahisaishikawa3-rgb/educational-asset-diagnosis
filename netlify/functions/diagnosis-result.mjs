@@ -92,7 +92,7 @@ export async function handler(event) {
       headers: createSupabaseHeaders(serviceRoleKey),
       body: JSON.stringify(payload),
     })
-    if (!stored.ok) return response(502, { error: 'storage_failed' })
+    if (!stored.ok) return response(502, { error: 'storage_failed', upstream_status: stored.status })
     return response(202, { stored: true })
   } catch {
     return response(502, { error: 'storage_failed' })
