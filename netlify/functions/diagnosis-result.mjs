@@ -15,6 +15,16 @@ const isScore = (value) => Number.isInteger(value) && value >= 1 && value <= 4
 const isAxisScore = (value) => Number.isInteger(value) && value >= 3 && value <= 12
 const isNullableToken = (value) => value === null || (typeof value === 'string' && value.length <= 100 && /^[a-zA-Z0-9._~-]+$/.test(value))
 
+export function createSupabaseHeaders(key) {
+  const headers = {
+    apikey: key,
+    'content-type': 'application/json',
+    prefer: 'return=minimal',
+  }
+  if (!key.startsWith('sb_secret_')) headers.authorization = `Bearer ${key}`
+  return headers
+}
+
 export function validatePayload(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
 
@@ -79,12 +89,7 @@ export async function handler(event) {
   try {
     const stored = await fetch(`${supabaseUrl}/rest/v1/diagnosis_results`, {
       method: 'POST',
-      headers: {
-        apikey: serviceRoleKey,
-        authorization: `Bearer ${serviceRoleKey}`,
-        'content-type': 'application/json',
-        prefer: 'return=minimal',
-      },
+      headers: createSupabaseHeaders(serviceRoleKey),
       body: JSON.stringify(payload),
     })
     if (!stored.ok) return response(502, { error: 'storage_failed' })

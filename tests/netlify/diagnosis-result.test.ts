@@ -1,7 +1,7 @@
 // @vitest-environment node
 
 import { describe, expect, it } from 'vitest'
-import { validatePayload } from '../../netlify/functions/diagnosis-result.mjs'
+import { createSupabaseHeaders, validatePayload } from '../../netlify/functions/diagnosis-result.mjs'
 
 const validPayload = {
   answers: Object.fromEntries(Array.from({ length: 12 }, (_, index) => [`Q${index + 1}`, 1])),
@@ -31,5 +31,16 @@ describe('diagnosis-result function', () => {
     expect(validatePayload({ ...validPayload, answers: { ...validPayload.answers, email: 'x@example.com' } })).toBeNull()
     expect(validatePayload({ ...validPayload, answers: { ...validPayload.answers, Q1: 5 } })).toBeNull()
     expect(validatePayload({ ...validPayload, utm_source: 'x@example.com' })).toBeNull()
+  })
+
+  it('新形式のSecret KeyをJWT用Authorizationヘッダーへ入れない', () => {
+    expect(createSupabaseHeaders('sb_secret_example')).toEqual({
+      apikey: 'sb_secret_example',
+      'content-type': 'application/json',
+      prefer: 'return=minimal',
+    })
+    expect(createSupabaseHeaders('legacy-jwt')).toEqual(expect.objectContaining({
+      authorization: 'Bearer legacy-jwt',
+    }))
   })
 })
