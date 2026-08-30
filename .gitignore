@@ -11,3 +11,6 @@ vite.config.d.ts
 
 # Local Netlify folder
 .netlify
+
+# Local Supabase CLI state
+supabase/.temp
