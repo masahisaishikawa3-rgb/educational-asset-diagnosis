@@ -1,7 +1,7 @@
 // @vitest-environment node
 
 import { describe, expect, it } from 'vitest'
-import { validatePayload } from './diagnosis-result.mjs'
+import { validatePayload } from '../../netlify/functions/diagnosis-result.mjs'
 
 const validPayload = {
   answers: Object.fromEntries(Array.from({ length: 12 }, (_, index) => [`Q${index + 1}`, 1])),
