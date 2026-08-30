@@ -118,6 +118,10 @@ function Landing({ onStart }: { onStart: () => void }) {
 
         <button className="primary-button hero-button" onClick={onStart}>診断を始める <span>→</span></button>
         <p className="privacy-note"><span>✓</span> 個人情報の入力は不要です</p>
+        <p className="anonymous-data-note">
+          診断結果（回答・スコア・判定）は、個人を特定しない形でサービス改善・統計分析に利用し、原則24か月保管します。<br />
+          詳しくは<a href="https://www.adop-context.jp/privacy" target="_blank" rel="noreferrer">個人情報保護方針</a>をご確認ください。
+        </p>
       </section>
 
       <section className="definition">

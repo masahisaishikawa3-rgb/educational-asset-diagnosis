@@ -23,6 +23,9 @@ describe('診断フロー', () => {
     expect(screen.getByRole('link', { name: 'adop Context 公式サイトへ' }).getAttribute('href'))
       .toBe('https://www.adop-context.jp/')
     expect(screen.getByText('© 2026 Adop-Context Co., Ltd.')).toBeTruthy()
+    expect(screen.getByText(/原則24か月保管します/)).toBeTruthy()
+    expect(screen.getByRole('link', { name: '個人情報保護方針' }).getAttribute('href'))
+      .toBe('https://www.adop-context.jp/privacy')
   })
 
   it('未回答では進めず、戻ったときに回答が復元される', async () => {
