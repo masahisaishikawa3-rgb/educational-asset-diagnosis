@@ -21,6 +21,7 @@ create table if not exists public.diagnosis_results (
 alter table public.diagnosis_results enable row level security;
 
 revoke all on table public.diagnosis_results from anon, authenticated;
+grant insert on table public.diagnosis_results to service_role;
 
 create index if not exists diagnosis_results_created_at_idx on public.diagnosis_results (created_at desc);
 create index if not exists diagnosis_results_level_idx on public.diagnosis_results (level);
