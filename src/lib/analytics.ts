@@ -1,5 +1,6 @@
 export type AnalyticsEvent =
   | 'diagnosis_view'
+  | 'diagnosis_cta_click'
   | 'diagnosis_start'
   | 'diagnosis_answer'
   | 'diagnosis_complete'

@@ -23,35 +23,42 @@ describe('診断フロー', () => {
     expect(screen.getByRole('link', { name: 'adop Context 公式サイトへ' }).getAttribute('href'))
       .toBe('https://www.adop-context.jp/')
     expect(screen.getByText('© 2026 Adop-Context Co., Ltd.')).toBeTruthy()
-    expect(screen.getByText(/原則24か月保管します/)).toBeTruthy()
-    expect(screen.getByRole('link', { name: '個人情報保護方針' }).getAttribute('href'))
-      .toBe('https://www.adop-context.jp/privacy')
+    expect(screen.getByText(/個人情報入力なし・結果はすぐ表示/)).toBeTruthy()
   })
 
   it('未回答では進めず、戻ったときに回答が復元される', async () => {
     const user = userEvent.setup()
     render(<App />)
 
-    await user.click(screen.getByRole('button', { name: /診断を始める/ }))
+    await user.click(screen.getByRole('button', { name: /ほとんど整理されていない/ }))
     const next = screen.getByRole('button', { name: /次へ/ })
     expect((next as HTMLButtonElement).disabled).toBe(true)
 
-    await user.click(screen.getByRole('radio', { name: /ほとんど整理されていない/ }))
+    await user.click(screen.getByRole('radio', { name: /主に担当者・熟練者の頭の中にある/ }))
     expect((next as HTMLButtonElement).disabled).toBe(false)
     await user.click(next)
-    expect(screen.getByText(/業務に必要な知識やノウハウ/)).toBeTruthy()
+    expect(screen.getByText(/新人・経験者・職種などによって/)).toBeTruthy()
 
     await user.click(screen.getByRole('button', { name: /戻る/ }))
-    expect(screen.getByRole('radio', { name: /ほとんど整理されていない/ }).getAttribute('aria-checked')).toBe('true')
+    expect(screen.getByRole('radio', { name: /主に担当者・熟練者の頭の中にある/ }).getAttribute('aria-checked')).toBe('true')
+  })
+
+  it('最初の質問の回答から診断を始められる', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: /部分的には整理されている/ }))
+    expect(screen.getByText(/業務に必要な知識やノウハウ/)).toBeTruthy()
+    expect(gtag).toHaveBeenCalledWith('event', 'diagnosis_start', {})
   })
 
   it('12問すべてに回答すると結果を順序どおり表示する', async () => {
     const user = userEvent.setup()
     render(<App />)
-    await user.click(screen.getByRole('button', { name: /診断を始める/ }))
+    await user.click(screen.getByRole('button', { name: /ほとんど整理されていない/ }))
     expect(gtag).toHaveBeenCalledWith('event', 'diagnosis_start', {})
 
-    for (let index = 0; index < 12; index += 1) {
+    for (let index = 1; index < 12; index += 1) {
       const choices = screen.getAllByRole('radio')
       await user.click(choices[0])
       const button = screen.getByRole('button', { name: index === 11 ? /診断結果を見る/ : /次へ/ })

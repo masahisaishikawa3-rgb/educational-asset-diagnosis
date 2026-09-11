@@ -27,10 +27,18 @@ function App() {
   const currentAnswer = answers[currentQuestion?.id]
 
   function startDiagnosis() {
+    document.getElementById('first-question')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    track('diagnosis_cta_click')
+  }
+
+  function startWithFirstAnswer(score: number) {
+    const firstQuestion = questions[0]
+    setAnswers((current) => ({ ...current, [firstQuestion.id]: score }))
     setScreen('question')
-    setQuestionIndex(0)
+    setQuestionIndex(1)
     setError('')
     track('diagnosis_start')
+    track('diagnosis_answer', { question_id: firstQuestion.id, answer_score: score })
   }
 
   function chooseAnswer(score: number) {
@@ -71,7 +79,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
-  if (screen === 'landing') return <Landing onStart={startDiagnosis} />
+  if (screen === 'landing') return <Landing onStart={startDiagnosis} onFirstAnswer={startWithFirstAnswer} />
 
   if (screen === 'question') {
     return (
@@ -102,11 +110,18 @@ function SiteFooter() {
   return <footer className="site-footer">© 2026 Adop-Context Co., Ltd.</footer>
 }
 
-function Landing({ onStart }: { onStart: () => void }) {
+function Landing({ onStart, onFirstAnswer }: { onStart: () => void; onFirstAnswer: (score: number) => void }) {
+  const firstQuestion = questions[0]
+
   return (
     <main className="landing-shell">
       <header className="site-header"><Brand /><span className="header-note">現在地を知る、最初の3分</span></header>
       <section className="hero">
+        <img className="hero-person" src="/assets/cta-guide-man.png" alt="" aria-hidden="true" />
+        <img className="hero-person hero-person-woman" src="/assets/cta-celebrate-woman.png" alt="" aria-hidden="true" />
+        <div className="hero-sparkles hero-sparkles-left" aria-hidden="true"><i /><i /><i /><i /></div>
+        <div className="hero-sparkles hero-sparkles-right" aria-hidden="true"><i /><i /><i /><i /></div>
+        <div className="hero-motion-lines" aria-hidden="true"><i /><i /></div>
         <h1>御社の社内知識は、<br /><em>「教育資産」</em>として<br className="mobile-only" />活用できていますか？</h1>
         <p className="hero-lead">12問・約3分で、社内知識の現在地を整理します。</p>
 
@@ -116,12 +131,42 @@ function Landing({ onStart }: { onStart: () => void }) {
           <div><span>03</span><p>次に取り組む<br />べきこと</p></div>
         </div>
 
-        <button className="primary-button hero-button" onClick={onStart}>診断を始める <span>→</span></button>
-        <p className="privacy-note"><span>✓</span> 個人情報の入力は不要です</p>
-        <p className="anonymous-data-note">
-          診断結果（回答・スコア・判定）は、個人を特定しない形でサービス改善・統計分析に利用し、原則24か月保管します。<br />
-          詳しくは<a href="https://www.adop-context.jp/privacy" target="_blank" rel="noreferrer">個人情報保護方針</a>をご確認ください。
-        </p>
+        <aside className="result-preview" aria-label="診断結果の表示イメージ">
+          <p className="result-preview-label">診断結果のイメージです</p>
+          <div className="result-preview-content">
+            <div className="result-preview-level">
+              <span>教育資産化レベル</span>
+              <p><small>LEVEL</small><strong>2</strong></p>
+              <b>資料蓄積型</b>
+            </div>
+            <div className="result-preview-bottleneck">
+              <span>最大のボトルネック</span>
+              <b>教材化</b>
+              <p>資料を「社員が学べる形」に変える工程に改善余地があります。</p>
+            </div>
+          </div>
+          <small className="result-preview-note">回答に合わせて、現在地と次の一歩をお伝えします</small>
+        </aside>
+
+        <button className="primary-button hero-button" onClick={onStart}>3分で現在地を確認する <span>→</span></button>
+        <p className="privacy-note"><span>✓</span> 個人情報入力なし・結果はすぐ表示</p>
+
+        <div className="first-question-preview" id="first-question">
+          <div className="first-question-heading">
+            <span>QUESTION 01 / 12</span>
+            <p>ここから診断が始まります</p>
+          </div>
+          <h2>{firstQuestion.prompt}</h2>
+          <div className="first-answer-list" aria-label="最初の質問を試す">
+            {firstQuestion.options.map((option, index) => (
+              <button key={option.score} type="button" onClick={() => onFirstAnswer(option.score)}>
+                <span>{String.fromCharCode(65 + index)}</span>
+                {option.label}
+                <b aria-hidden="true">→</b>
+              </button>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="definition">
