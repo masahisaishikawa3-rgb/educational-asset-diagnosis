@@ -122,6 +122,8 @@ function Landing({ onStart, onFirstAnswer }: { onStart: () => void; onFirstAnswe
         <div className="hero-sparkles hero-sparkles-left" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="hero-sparkles hero-sparkles-right" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="hero-motion-lines" aria-hidden="true"><i /><i /></div>
+        <div className="hero-callout hero-callout-free" aria-label="無料">無料</div>
+        <div className="hero-callout hero-callout-signup" aria-label="ユーザー登録なし">ユーザー<br />登録なし</div>
         <h1>御社の社内知識は、<br /><em>「教育資産」</em>として<br className="mobile-only" />活用できていますか？</h1>
         <p className="hero-lead">12問・約3分で、社内知識の現在地を整理します。</p>
 
