@@ -9,3 +9,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
+
+[[headers]]
+  for = "/assets/cta-*-v2.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

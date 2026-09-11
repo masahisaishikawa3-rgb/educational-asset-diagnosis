@@ -117,8 +117,8 @@ function Landing({ onStart, onFirstAnswer }: { onStart: () => void; onFirstAnswe
     <main className="landing-shell">
       <header className="site-header"><Brand /><span className="header-note">現在地を知る、最初の3分</span></header>
       <section className="hero">
-        <img className="hero-person" src="/assets/cta-guide-man.png" alt="" aria-hidden="true" />
-        <img className="hero-person hero-person-woman" src="/assets/cta-celebrate-woman.png" alt="" aria-hidden="true" />
+        <img className="hero-person" src="/assets/cta-guide-man-v2.png" alt="" aria-hidden="true" width="640" height="960" loading="eager" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.hidden = true }} />
+        <img className="hero-person hero-person-woman" src="/assets/cta-celebrate-woman-v2.png" alt="" aria-hidden="true" width="640" height="960" loading="eager" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.hidden = true }} />
         <div className="hero-sparkles hero-sparkles-left" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="hero-sparkles hero-sparkles-right" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="hero-motion-lines" aria-hidden="true"><i /><i /></div>
